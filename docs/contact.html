@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>聯絡我們 - 裕傢室內裝修有限公司</title>
+  <link rel="stylesheet" href="css/contact-style.css" />
+
+  <style>
+    .top-nav {
+      background-color: #333;
+      color: white;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .hamburger {
+      font-size: 1.8rem;
+      background: none;
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: none;
+      top: 50%; /* 導覽列高度的 50% */
+      transform: translateY(-50%); /* 往上拉一半高度，達到垂直置中 */
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #f0c040;
+    }
+    .mobile-only {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+      .mobile-only {
+        display: inline;
+      }
+      .nav-links {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background-color: #333;
+        flex-direction: column;
+        align-items: center;
+        display: none;
+        padding: 1rem 0;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+    }
+
+    /* 回頂按鈕 */
+    #backToTop {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      display: none;
+      font-size: 1.5rem;
+      padding: 10px 15px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    #backToTop.show {
+      display: block;
+    }
+
+    /* 簡易頁尾 */
+    .footer {
+      background-color: #f0f0f0;
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .center-text {
+      margin: 0;
+      color: #333;
+    }
+    p, h1 {
+      line-height: 1.7;
+      letter-spacing: 0.5px;
+      word-spacing: 2px;
+      font-family: 'Noto Sans TC', 'Segoe UI', sans-serif;
+    }
+    .footer p {
+      font-size: clamp(12px, 2vw, 16px); /* 最小 12px，隨螢幕寬度變化，最大 16px */
+      white-space: nowrap;               /* 禁止自動換行 */
+      overflow: hidden;                  /* 避免超出容器 */
+      text-overflow: ellipsis;           /* 超出時用 ... 表示，可選 */
+    }
+  </style>
+</head>
+<body>
+  <!-- 回到頂部按鈕 -->
+  <button id="backToTop" title="回到頂部">⬆</button>
+
+  <!-- 響應式導覽列 -->
+  <nav class="top-nav">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><span class="mobile-only">裕傢室內裝修有限公司</span></a>
+      <button class="hamburger" id="hamburger" aria-label="開啟選單">☰</button>
+      <ul class="nav-links" id="navMenu">
+        <li><a href="index.html">首頁</a></li>
+        <li><a href="about.html">關於我們</a></li>
+        <li><a href="services.html">服務項目</a></li>
+        <li><a href="cases.html">服務案例</a></li>
+        <li><a href="contact.html">聯絡我們</a></li>
+        <li><a href="https://www.1111.com.tw/corp/67789982" target="_blank">加入我們</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 主內容區 -->
+  <section class="bg-photo">
+    <div class="bg-overlay"></div>
+    <div class="text-container">
+      <h1>聯絡我們</h1>
+    <h2>裕傢室內裝修有限公司</h2>
+    <p>
+      地址：新北市新莊區五工三路62巷28號1樓
+      <br/>
+      電話：(02)2298-0027
+      <br/>
+      傳真：(02)2298-8956
+      <br/>
+      手機：0933-937209
+      <br/>
+      E-mail：937209@yujia1688.com.tw
+    </p>
+    <br/>
+    <img src="img/lineqrcode.jpg" style="display:block; margin: 0 auto;">
+    </div>
+  </section>
+
+  <!-- JS 控制：選單與回頂功能 -->
+  <!-- JavaScript 功能 -->
+  <script>
+    // 漢堡選單切換
+    document.getElementById("hamburger").addEventListener("click", function () {
+      document.getElementById("navMenu").classList.toggle("open");
+    });
+
+    // 回頂按鈕
+    window.onscroll = function () {
+      const btn = document.getElementById("backToTop");
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        btn.classList.add("show");
+      } else {
+        btn.classList.remove("show");
+      }
+    };
+    document.getElementById("backToTop").onclick = function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+  </script>
+  <!-- 網站版權 footer -->
+  <footer class="footer">
+    <p class="center-text">版權所有 © 裕傢室內裝修有限公司｜Designed by 要留儀翰 網頁設計</p>
+  </footer>
+</body>
+</html>

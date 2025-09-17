@@ -1,0 +1,210 @@
+/* 字體與排版 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', 'Noto Sans TC', sans-serif;
+  background: #1a1a1a;
+  color: #f0f0f0;
+}
+p, h1 {
+  line-height: 1.7;
+  letter-spacing: 0.5px;
+  word-spacing: 2px;
+}
+p {
+  font-size: 25px;
+}
+a {
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  color: #00aaff;
+}
+.fonti {
+  color: aqua;
+}
+
+/* 導覽列 */
+.top-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 1rem 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  z-index: 1000;
+}
+.top-nav a {
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+/* 回頂按鈕 + 動畫 */
+#backToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  font-size: 2rem;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  animation: bounce 2s infinite;
+  display: none;
+  z-index: 100;
+}
+#backToTop.show {
+  display: block;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* 漢堡選單 */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 1001;
+  position: absolute;
+  left: 20px;
+  top: 15px;
+}
+.mobile-menu {
+  display: flex;
+  gap: 30px;
+}
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(0,0,0,0.95);
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+  }
+  .mobile-menu.open {
+    display: flex;
+  }
+  .top-nav {
+    flex-direction: row;
+    justify-content: flex-end;
+    position: relative;
+  }
+  .top-nav a {
+    font-size: 1.2rem;
+  }
+}
+
+/* 背景圖區塊 */
+.bg-photo {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  background-image: url('../img/住家/住家01.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+.text-container {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 40px;
+  color: white;
+  background-color: rgba(0,0,0,0.4);
+  border-radius: 12px;
+  font-family: 'Noto Sans TC', sans-serif;
+  line-height: 1.8;
+  text-align: justify;
+}
+.text-container h1 {
+  font-size: 35px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* 公司資訊欄（如需） */
+.info-bar {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 15px 40px;
+  z-index: 4;
+  backdrop-filter: blur(6px);
+}
+
+/* 主要內容區 */
+.content {
+  padding: 60px 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+/* footer 固定底部 */
+.footer {
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  position: relative;
+}
+.center-text {
+  margin: 0;
+  text-align: center;
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+  .info-bar {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+  .content, .text-container {
+    padding: 40px 15px;
+    font-size: 0.95rem;
+  }
+}
+@media (max-width: 480px) {
+  .info-bar {
+    flex-direction: column;
+    line-height: 1.4;
+  }
+}

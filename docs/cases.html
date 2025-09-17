@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>服務案例展示</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="css/cases-style.css" />
+
+  <style>
+    html, body { height: 100%; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Noto Sans TC', 'Segoe UI', sans-serif;
+      color: #f0f0f0;
+      background: #1e1f26;
+    }
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      background: url('img/住家/住家01.jpg') center / cover no-repeat;
+      z-index: 0;
+      pointer-events: none;
+      will-change: transform;
+    }
+    .page{ position: relative; z-index: 1; }
+    @media (max-width: 1024px){ body::before{ background-attachment: scroll; } }
+
+    .top-nav { background-color:#333; color:#fff; padding:1rem; position:sticky; top:0; z-index:1000; }
+    .nav-container { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; }
+    .logo { color:#fff; text-decoration:none; font-size:1.2rem; font-weight:bold; }
+    .logo .mobile-only{ display:none; }
+    .logo .desktop-only{ display:inline; }
+    .hamburger{ font-size:1.8rem; background:none; color:#fff; border:none; cursor:pointer; display:none; top:50%; transform:translateY(-50%); }
+    .nav-links{ list-style:none; display:flex; gap:1.5rem; margin:0; padding:0; }
+    .nav-links li a{ color:#fff; text-decoration:none; font-size:1rem; transition:color .3s ease; }
+    .nav-links li a:hover{ color:#f0c040; }
+    @media (max-width:768px){
+      .hamburger{ display:block; }
+      .nav-links{ position:absolute; top:60px; left:0; right:0; background:#333; flex-direction:column; align-items:center; display:none; padding:1rem 0; }
+      .nav-links.open{ display:flex; }
+      .logo .desktop-only{ display:none; }
+      .logo .mobile-only{ display:inline; }
+    }
+
+    :root{ --container:1200px; --nav-h:64px; --radius:12px; --gap:24px; }
+    main.site-main{ flex:1; padding:32px 16px 56px; }
+    .cases{
+      max-width:var(--container); margin:0 auto;
+      background:rgba(0,0,0,.55);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:var(--radius);
+      padding:32px 16px 28px;
+    }
+    .cases__title{ text-align:center; margin:0 0 24px; }
+    p, h1 { line-height:1.7; letter-spacing:.5px; word-spacing:2px; }
+
+    .grid{ display:grid; gap:var(--gap); grid-template-columns:repeat(12,1fr); }
+    .card{
+      grid-column:span 4;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:var(--radius); overflow:hidden; cursor:pointer;
+      transition:transform .2s, box-shadow .2s, border-color .2s;
+    }
+    .card:hover{ transform:translateY(-2px); box-shadow:0 10px 30px rgba(0,0,0,.35); border-color:rgba(255,255,255,.18); }
+    .card__img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; }
+    .card__body{ padding:16px; }
+    .card__title{ margin:0 0 8px; font-size:1.05rem; }
+    .card__desc{ margin:0; opacity:.95; }
+
+    /* 預覽文字：限制行數 + 省略號 */
+    .card__desc--preview{
+      display:-webkit-box;
+      -webkit-box-orient:vertical;
+      -webkit-line-clamp:2; /* 卡片預覽最多兩行 */
+      overflow:hidden;
+      line-height:1.6;
+      color:#ddd;
+      display: -webkit-box;
+     display: box; /* 標準屬性：某些新版本瀏覽器支援 */
+      -webkit-box-orient: vertical;
+      box-orient: vertical; /* 標準屬性 */
+  
+      -webkit-line-clamp: 2; /* Webkit 專用：Chrome, Safari */
+     line-clamp: 2; /* 標準屬性：Firefox 等新瀏覽器開始支援 */
+  
+      overflow: hidden;
+     text-overflow: ellipsis;
+     line-height: 1.6;
+     color: #ddd;
+    }
+    @media (max-width:640px){
+      .card__desc--preview{ -webkit-line-clamp:3;line-clamp: 3; } /* 手機最多三行 */
+    }
+
+    @media (max-width:1024px){ .card{ grid-column:span 6; } }
+    @media (max-width:640px){ .card{ grid-column:span 12; } }
+
+    #backToTop{
+      position:fixed; bottom:40px; right:40px; display:none;
+      font-size:1.5rem; padding:10px 15px; background:#333; color:#fff;
+      border:none; border-radius:50%; cursor:pointer; z-index:1000;
+    }
+    #backToTop.show{ display:block; }
+
+    .modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:1200; }
+    .modal.is-open{ display:flex; }
+    .modal__backdrop{ position:absolute; inset:0; background:rgba(0,0,0,.8); z-index:0; }
+    .modal__dialog{
+      position:relative; z-index:1; width:min(92vw, 840px);
+      background:#222; border-radius:12px; padding:20px 20px 24px;
+      border:1px solid rgba(255,255,255,.06);
+    }
+    .modal__close{ position:absolute; top:10px; right:14px; font-size:1.8rem; color:#fff; background:none; border:0; cursor:pointer; z-index:3; }
+    .modal__title{ margin:14px 0 6px; }
+    .modal__desc{ margin:0 0 6px; opacity:.95; }
+
+    .swiper{ width:100%; height:auto; position:relative; }
+    .swiper-slide{ display:flex; justify-content:center; align-items:center; }
+    .swiper-slide img{ width:100%; max-height:420px; object-fit:contain; }
+    .swiper-button-next, .swiper-button-prev, .swiper-pagination{ z-index:2; }
+
+    .footer{ background:#f0f0f0; padding:1rem; text-align:center; font-size:.9rem; color:#333; }
+    .footer p{ font-size:clamp(12px, 2vw, 16px); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .swiper, .swiper-wrapper, .swiper-slide {
+  height: auto;
+  }
+  .swiper-slide img {
+     width: 100%;
+     height: auto; /* 讓圖片高度依照比例變化 */
+     max-height: 75vh; /* 避免圖片過高 */
+     object-fit: contain;
+     display: block;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <button id="backToTop" title="回到頂部">⬆</button>
+
+    <nav class="top-nav">
+      <div class="nav-container">
+        <a href="index.html" class="logo"><span class="mobile-only">裕傢室內裝修有限公司</span></a>
+        <button class="hamburger" id="hamburger" aria-label="開啟選單">☰</button>
+        <ul class="nav-links" id="navMenu">
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="about.html">關於我們</a></li>
+          <li><a href="services.html">服務項目</a></li>
+          <li><a href="cases.html" aria-current="page">服務案例</a></li>
+          <li><a href="contact.html">聯絡我們</a></li>
+          <li><a href="https://www.1111.com.tw/corp/67789982" target="_blank" rel="noopener">加入我們</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="site-main" id="mainContent" tabindex="-1">
+      <section class="cases" aria-labelledby="casesTitle">
+        <h1 class="cases__title" id="casesTitle">服務案例總覽</h1>
+        <div class="grid" id="caseGrid"></div>
+      </section>
+    </main>
+
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc" hidden>
+      <div class="modal__backdrop" data-close="backdrop"></div>
+      <div class="modal__dialog" tabindex="-1">
+        <button class="modal__close" id="modalClose" aria-label="關閉">×</button>
+        <div class="swiper">
+          <div class="swiper-wrapper"></div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next" aria-label="下一張"></div>
+          <div class="swiper-button-prev" aria-label="上一張"></div>
+        </div>
+        <h2 class="modal__title" id="modalTitle"></h2>
+        <p class="modal__desc" id="modalDesc"></p>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p class="center-text">版權所有 © 裕傢室內裝修有限公司｜Designed by 要留儀翰 網頁設計</p>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    // 漢堡選單
+    document.getElementById("hamburger").addEventListener("click", function () {
+      const menu = document.getElementById("navMenu");
+      const open = menu.classList.toggle("open");
+      this.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    // 回頂
+    window.addEventListener('scroll', function () {
+      const btn = document.getElementById("backToTop");
+      btn.classList.toggle("show", (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300));
+    }, { passive: true });
+    document.getElementById("backToTop").onclick = function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+  </script>
+
+  <!-- 服務案例（私有作用域） -->
+  <script>
+  (function () {
+    const CASES = [
+      {
+        title:"🔹 廠房",
+        category:"factory",
+        preview:"提升生產效率與安全，完整動線與空間整合。",
+        desc:"本案針對大型廠房做整體規劃，包含動線設計、安全性提升與作業區最佳化，讓流程更順暢並降低風險。",
+        images:["img/廠房/廠房01.jpg","img/廠房/廠房02.jpg","img/廠房/廠房03.jpg","img/廠房/廠房04.jpg","img/廠房/廠房05.jpg","img/廠房/廠房06.jpg"]
+      },
+      {
+        title:"🔹 學校",
+        category:"school",
+        preview:"優化教室與公共區域，打造舒適安全的學習環境。",
+        desc:"重新配置教室、照明與通風；兼顧安全性與便利性，營造舒適、實用的學習空間。",
+        images:["img/學校/學校01.jpg","img/學校/學校02.jpg","img/學校/學校03.jpg","img/學校/學校04.jpg","img/學校/學校05.jpg"]
+      },
+      {
+        title:"🔹 住家",
+        category:"home",
+        preview:"結合收納與動線，美感與機能並重的居家空間。",
+        desc:"以舒適與實用為核心，整合收納設計、動線與材質色彩，提供溫馨便利的居住體驗。",
+        images:["img/住家/住家01.jpg","img/住家/住家02.jpg","img/住家/住家03.jpg","img/住家/住家04.jpg","img/住家/住家05.jpg"]
+      },
+      {
+        title:"🔹 醫療院所",
+        category:"medical",
+        preview:"整合候診、診間與無障礙動線，提升就診效率。",
+        desc:"以醫療流程為核心，優化候診區、診療室與無障礙設施，提升效率與舒適度。",
+        images:["img/醫院/醫院01.jpg","img/醫院/醫院02.jpg","img/醫院/醫院03.jpg","img/醫院/醫院04.jpg","img/醫院/醫院05.jpg"]
+      },
+      {
+        title:"🔹 辦公室",
+        category:"office",
+        preview:"開放式工作區、會議室與休憩區，強化協作效率。",
+        desc:"重塑動線與分區，結合會議協作與員工休憩空間，打造效率與互動兼具的辦公環境。",
+        images:["img/辦公室/辦公室01.jpg","img/辦公室/辦公室02.jpg","img/辦公室/辦公室03.jpg","img/辦公室/辦公室04.jpg"]
+      },
+      {
+        title:"🔹 實驗室",
+        category:"laboratory",
+        preview:"高規格安全與通風設計，提升研究效能。",
+        desc:"重點在於安全防護、通風與設備配置，提供穩定可靠的研究空間。",
+        images:["img/實驗室/實驗室01.jpg","img/實驗室/實驗室02.jpg","img/實驗室/實驗室03.jpg","img/實驗室/實驗室04.jpg","img/實驗室/實驗室05.jpg"]
+      },
+      {
+        title:"🔹 特約策略聯盟",
+        category:"partner",
+        preview:"合作夥伴資訊與聯盟專案對外展示。",
+        desc:"介紹合作廠商與策略聯盟夥伴，包含專案連結與合作內容。外部連結：https://www.threepower.com.tw/index_tw.php",
+        images:["img/廠商/廠商01.jpg","img/廠商/廠商02.jpg","img/廠商/廠商03.jpg","img/廠商/廠商04.jpg","img/廠商/廠商05.jpg"]
+      }
+    ];
+
+    // 卡片渲染：外層用 preview，沒有就自動截取 desc 前 80 字
+    const grid = document.getElementById('caseGrid');
+    grid.innerHTML = CASES.map((c,i)=>{
+      const short = (c.preview && c.preview.trim())
+        ? c.preview.trim()
+        : (String(c.desc||'').trim().slice(0,80) + (String(c.desc||'').length>80 ? '…' : ''));
+      return `
+        <article class="card" data-index="${i}" tabindex="0" aria-labelledby="card-title-${i}">
+          <img class="card__img" src="${c.images[0]}" alt="案例預覽：${c.title}" loading="lazy">
+          <div class="card__body">
+            <h3 class="card__title" id="card-title-${i}">${c.title}</h3>
+            <p class="card__desc card__desc--preview">${short}</p>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    // Modal + Swiper
+    const modal = document.getElementById('modal');
+    const modalDialog = modal.querySelector('.modal__dialog');
+    const modalClose = document.getElementById('modalClose');
+    const swiperEl = modal.querySelector('.swiper');
+    let swiper;
+
+    function mountSlides(images, title){
+      const slides = images.map(src => `<div class="swiper-slide"><img src="${src}" alt="${title} 圖片" loading="lazy"></div>`);
+      const paginationEl = modal.querySelector('.swiper-pagination');
+      const nextEl = modal.querySelector('.swiper-button-next');
+      const prevEl = modal.querySelector('.swiper-button-prev');
+
+      if(!swiper){
+        swiper = new Swiper(swiperEl, {
+          autoHeight: true,
+          loop: true,
+          pagination: { el: paginationEl },
+          navigation: { nextEl, prevEl }
+        });
+        swiper.appendSlide(slides);
+      }else{
+        swiper.removeAllSlides();
+        swiper.appendSlide(slides);
+        swiper.updateSlides();
+        swiper.update();
+        swiper.navigation.update();
+        swiper.pagination.render();
+        swiper.pagination.update();
+        swiper.slideToLoop(0, 0);
+      }
+    }
+
+    function openModalByIndex(index){
+      const item = CASES[index];
+      if (!item) return;
+      modal.hidden = false;
+      modal.classList.add('is-open');
+      document.getElementById('modalTitle').textContent = item.title;
+      document.getElementById('modalDesc').textContent = item.desc; // 內層顯示完整描述
+      mountSlides(item.images, item.title);
+      modalDialog.focus();
+      document.addEventListener('keydown', trapFocus);
+    }
+
+    // 卡片點擊 / Enter
+    grid.addEventListener('click', (e)=>{
+      const card = e.target.closest('.card');
+      if(card) openModalByIndex(Number(card.dataset.index));
+    });
+    grid.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter'){
+        const card = e.target.closest('.card');
+        if(card) openModalByIndex(Number(card.dataset.index));
+      }
+    });
+
+    function closeModal(){
+      modal.classList.remove('is-open');
+      modal.hidden = true;
+      document.removeEventListener('keydown', trapFocus);
+      const main = document.getElementById('mainContent');
+      if(main) main.focus({ preventScroll:true });
+    }
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e)=>{ if(e.target.dataset.close === 'backdrop') closeModal(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && modal.classList.contains('is-open')) closeModal(); });
+
+    function trapFocus(e){
+      if(e.key !== 'Tab' || !modal.classList.contains('is-open')) return;
+      const focusables = modalDialog.querySelectorAll('a, button, textarea, input, select, [tabindex]:not([tabindex="-1"])');
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    }
+
+    /* 自動開啟（相容 ?open= 或 ?category=） */
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(location.search);
+      const key = (params.get('open') || params.get('category') || '').toLowerCase();
+      if (!key) return;
+      const idx = CASES.findIndex(c => (c.category || '').toLowerCase() === key);
+      if (idx > -1) {
+        setTimeout(() => openModalByIndex(idx), 0);
+      } else {
+        console.warn('找不到分類：', key, '可用：', CASES.map(c=>c.category).join(', '));
+      }
+    });
+  })();
+  </script>
+</body>
+</html>

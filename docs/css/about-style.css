@@ -1,0 +1,293 @@
+/* 字體與排版 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', 'Noto Sans TC', sans-serif;
+  background: #1a1a1a;
+  color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+}
+p, h1 {
+  line-height: 1.7;
+  letter-spacing: 0.5px;
+  word-spacing: 2px;
+  font-family: 'Noto Sans TC', 'Segoe UI', sans-serif;
+}
+p {
+  font-size: 25px;
+}
+a {
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  color: #00aaff;
+}
+.fonti {
+  color: aqua;
+}
+
+/* 導覽列 */
+.top-nav {
+  width: 100%;
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.top-nav a {
+  font-weight: bold;
+  transition: color 0.2s;
+}
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+/* 回頂按鈕 + 動畫 */
+#backToTop {
+  background: none;
+  animation: bounce 2s infinite;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  display: none;
+  font-size: 1.5rem;
+  padding: 10px 15px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1000;
+
+}
+#backToTop.show {
+  display: block;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* 公司資訊欄 */
+.info-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 15px 40px;
+  z-index: 4;
+  backdrop-filter: blur(6px);
+}
+
+/* 主要內容區 */
+.content {
+  padding: 60px 20px;
+  max-width: 800px;
+  margin: auto;
+}
+.center-text {
+  text-align: center;
+  font-size: 12px;
+  margin: 0;
+  color: #333;
+}
+
+/* 背景圖區塊 */
+.bg-photo {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  background-image: url('../img/住家/住家01.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+.text-container {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 40px;
+  color: white;
+  background-color: rgba(0,0,0,0.4);
+  border-radius: 12px;
+  line-height: 1.8;
+  text-align: justify;
+}
+.text-container h1 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* footer 固定底部 */
+.footer {
+  height: 20px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.footer p {
+  font-size: clamp(12px, 2vw, 16px); /* 最小 12px，隨螢幕寬度變化，最大 16px */
+  white-space: nowrap;               /* 禁止自動換行 */
+  overflow: hidden;                  /* 避免超出容器 */
+  text-overflow: ellipsis;           /* 超出時用 ... 表示，可選 */
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .controls-left, .controls-right {
+    font-size: 1.2rem;
+    padding: 6px;
+  }
+  .info-bar {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+  .content, .text-container {
+    padding: 40px 15px;
+    font-size: 0.95rem;
+  }
+  .top-nav {
+    flex-direction: row;
+    justify-content: flex-end;
+    position: relative;
+  }
+  .top-nav a {
+    font-size: 1.2rem;
+  }
+  .hamburger {
+    display: block;
+  }
+  .mobile-only {
+    display: inline;
+  }
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: #333;
+    flex-direction: column;
+    align-items: center;
+    display: none;
+    padding: 1rem 0;
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  
+  .hamburger {
+    display: block;
+  }
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(0,0,0,0.95);
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+  }
+  .mobile-menu.open {
+    display: flex;
+  }
+}
+@media (max-width: 480px) {
+  .controls-left, .controls-right {
+    font-size: 1rem;
+    padding: 4px;
+  }
+  .info-bar {
+    flex-direction: column;
+    line-height: 1.4;
+  }
+}
+
+/* 漢堡選單 */
+.hamburger {
+  z-index: 1001;
+  position: absolute;
+  left: 20px;
+  font-size: 1.8rem;
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: none;
+  top: 50%; /* 導覽列高度的 50% */
+  transform: translateY(-50%); /* 往上拉一半高度，達到垂直置中 */
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #f0c040;
+}
+
+.mobile-only {
+  display: none;
+}
+
+.mobile-menu {
+  display: flex;
+  gap: 30px;
+}

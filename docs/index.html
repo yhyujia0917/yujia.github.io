@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="裕傢室內裝修有限公司，提供專業室內設計與裝修工程，設計美學與實用兼備，歡迎聯繫我們了解更多。">
+  <meta name="keywords" content="室內裝修, 室內設計, 裝潢, 裝修公司, 裕傢室內裝修, 台中裝潢">
+  <meta name="author" content="裕傢室內裝修有限公司">
+  <meta property="og:title" content="裕傢室內裝修有限公司 - 專業室內裝潢設計">
+  <meta property="og:description" content="打造質感生活空間，專業設計與工程施工，立即了解我們的服務項目。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="img/住宅01.jpg">
+  <meta property="og:url" content="https://yourdomain.com">
+  <title>品牌首頁</title>
+
+  <!-- 字體與樣式 -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/index-style.css">
+  <style>
+    .top-nav {
+      background-color: #333;
+      color: white;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .hamburger {
+      font-size: 1.8rem;
+      background: none;
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: none;
+      top: 50%; /* 導覽列高度的 50% */
+      transform: translateY(-50%); /* 往上拉一半高度，達到垂直置中 */
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #f0c040;
+    }
+    .mobile-only {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+      .mobile-only {
+        display: inline;
+      }
+      .nav-links {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background-color: #333;
+        flex-direction: column;
+        align-items: center;
+        display: none;
+        padding: 1rem 0;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+    }
+
+    /* 回頂按鈕 */
+    #backToTop {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      display: none;
+      font-size: 1.5rem;
+      padding: 10px 15px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    #backToTop.show {
+      display: block;
+    }
+
+    /* 簡易頁尾 */
+    .footer {
+      background-color: #f0f0f0;
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .center-text {
+      margin: 0;
+      color: #333;
+      font-size: 12px;
+    }
+    .footer p {
+      font-size: clamp(12px, 2vw, 16px); /* 最小 12px，隨螢幕寬度變化，最大 16px */
+      white-space: nowrap;               /* 禁止自動換行 */
+      overflow: hidden;                  /* 避免超出容器 */
+      text-overflow: ellipsis;           /* 超出時用 ... 表示，可選 */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 回到頂部按鈕 -->
+  <button id="backToTop" title="回到頂部">⬆</button>
+
+  <!-- 響應式導覽列 -->
+  <nav class="top-nav">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><span class="mobile-only">裕傢室內裝修有限公司</span></a>
+      <button class="hamburger" id="hamburger" aria-label="開啟選單">☰</button>
+      <ul class="nav-links" id="navMenu">
+        <li><a href="index.html">首頁</a></li>
+        <li><a href="about.html">關於我們</a></li>
+        <li><a href="services.html">服務項目</a></li>
+        <li><a href="cases.html">服務案例</a></li>
+        <li><a href="contact.html">聯絡我們</a></li>
+        <li><a href="https://www.1111.com.tw/corp/67789982" target="_blank">加入我們</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- 輪播區 -->
+  <section class="hero">
+    <div class="slider">
+      <div class="slides" id="slides">
+        <div class="slide"><a href="cases.html?category=home"><img src="img/住家/住家01.jpg" alt="現代簡約風格室內設計" /></a></div>
+        <div class="slide"><a href="cases.html?category=factory"><img src="img/廠房/廠房01.jpg" alt="科技風格室內裝潢" /></a></div>
+        <div class="slide"><a href="cases.html?category=office"><img src="img/辦公室/辦公室01.jpg" alt="都會風室內設計案例" /></a></div>
+        <div class="slide"><a href="cases.html?category=medical"><img src="img/醫院/醫院01.jpg" alt="科技風格室內裝潢" /></a></div>
+        <div class="slide"><a href="cases.html?category=school"><img src="img/學校/學校01.jpg" alt="都會風室內設計案例" /></a></div>
+        <div class="slide"><a href="cases.html?category=laboratory"><img src="img/實驗室/實驗室01.jpg" alt="科技風格室內裝潢" /></a></div>
+      </div>
+      <button class="controls-left" onclick="prevSlide()">⟨</button>
+      <button class="controls-right" onclick="nextSlide()">⟩</button>
+      <div class="slide-indicator" id="slide-indicator">第 1 張 / 共 3 張</div>
+      <footer class="info-bar">
+        <p><a href="about.html">裕傢室內裝修有限公司</a> | <a href="services.html">室內裝修</a> | <a href="cases.html">專業設計</a> | <a href="contact.html">聯絡我們</a></p>  
+      </footer>
+    </div>
+  </section>
+
+  <!-- 網站版權 footer -->
+  <footer class="footer">
+    <p class="center-text">版權所有 © 裕傢室內裝修有限公司｜Designed by 要留儀翰 網頁設計</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/script.js"></script>
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('open');
+    }
+  </script>
+  <script>
+    // 漢堡選單切換
+    document.getElementById("hamburger").addEventListener("click", function () {
+      document.getElementById("navMenu").classList.toggle("open");
+    });
+
+    // 回頂按鈕
+    window.onscroll = function () {
+      const btn = document.getElementById("backToTop");
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        btn.classList.add("show");
+      } else {
+        btn.classList.remove("show");
+      }
+    };
+    document.getElementById("backToTop").onclick = function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+  </script>
+</body>
+</html>

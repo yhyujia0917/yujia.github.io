@@ -1,0 +1,376 @@
+/* -----------------------------------
+   字體設定（建議在 <head> 中引入 Google 字體）
+----------------------------------- */
+p {
+  font-family: 'Noto Sans TC', 'Segoe UI', sans-serif;
+}
+
+/* -----------------------------------
+   全域設定與字體樣式
+----------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  background: #000;
+  color: white;
+}
+a {
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  color: #00aaff;
+}
+
+/* -----------------------------------
+   導覽列
+----------------------------------- */
+.top-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 1rem 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  z-index: 1000;
+}
+
+
+.top-nav {
+      background-color: #333;
+      color: white;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .top-nav a {
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    .hamburger {
+      font-size: 1.8rem;
+      background: none;
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: none;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #f0c040;
+    }
+    .mobile-only {
+      display: none;
+    }
+/* -----------------------------------
+   回到頂部按鈕
+----------------------------------- */
+#backToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  font-size: 2rem;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  animation: bounce 2s infinite;
+  display: none;
+  z-index: 100;
+}
+
+#backToTop.show {
+  display: block;
+}
+
+/* bounce 動畫 */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* -----------------------------------
+   輪播區（使用比例）
+----------------------------------- */
+.hero {
+  position: relative;
+}
+/* 簡易頁尾 */
+    .footer {
+  background-color: #f0f0f0;
+  padding: 1rem;
+  font-size: 0.9rem;
+  max-height: 32px;
+
+  /* 水平垂直置中用 Flexbox */
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  align-items: center;     /* 垂直置中 */
+
+  /* 如果想固定在底部，可加這行 */
+  /* position: fixed;
+     bottom: 0;
+     left: 0;
+     width: 100%; */
+}
+
+.center-text {
+  margin: 0;
+  color: #333;
+}  
+.slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;  /* 比例自動調整 */
+  height: calc(89vh); /* 假設 info-bar 是 60px 高 */
+  display: flex;
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* 幻燈片左右按鈕 */
+.controls-left, .controls-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.7);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 2rem;
+  z-index: 2;
+}
+
+.controls-left { left: 10px; }
+.controls-right { right: 10px; }
+
+/* 幻燈片進度顯示 */
+.slide-indicator {
+  position: absolute;
+  bottom: 75px;
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+  z-index: 3;
+}
+
+/* 向下箭頭 */
+.scroll-down {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  animation: bounce 2s infinite;
+  cursor: pointer;
+  color: white;
+  z-index: 5;
+}
+
+/* 公司資訊欄 */
+.info-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 15px 40px;
+  z-index: 4;
+  backdrop-filter: blur(6px);
+}
+
+/* 主要內容 */
+.content {
+  padding: 60px 20px;
+  max-width: 800px;
+  margin: auto;
+  line-height: 1.8;
+}
+
+.center-text {
+  text-align: center;
+  font-size: 12px;
+}
+
+/* -----------------------------------
+   響應式設計
+----------------------------------- */
+@media (max-width: 768px) {
+  .slider {
+    aspect-ratio: 4 / 3; /* 平板比例略高 */
+  }
+
+  .controls-left, .controls-right {
+    font-size: 1.2rem;
+    padding: 6px;
+  }
+
+  .slide-indicator {
+    bottom: 40px;
+    font-size: 0.9rem;
+  }
+
+  .scroll-down {
+    font-size: 1.5rem;
+    bottom: 3vh;
+  }
+
+  .info-bar {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+
+  .content {
+    padding: 40px 15px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .slider {
+    aspect-ratio: 3 / 2;
+  }
+
+  .controls-left, .controls-right {
+    font-size: 1rem;
+    padding: 4px;
+  }
+
+  .slide-indicator {
+    font-size: 0.8rem;
+  }
+
+  .info-bar {
+    flex-direction: column;
+    line-height: 1.4;
+  }
+}
+
+/* -----------------------------------
+   漢堡選單樣式
+----------------------------------- */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 1001;
+  position: absolute;
+  left: 20px;
+  top: 15px;
+}
+
+.mobile-menu {
+  display: flex;
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(0,0,0,0.95);
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .mobile-menu.open {
+    display: flex;
+  }
+
+  .top-nav {
+    flex-direction: row;
+    justify-content: flex-end;
+    position: relative;
+  }
+
+  .top-nav a {
+    color: white;
+    font-size: 1.2rem;
+  }
+}
+p, h1 {
+  line-height: 1.7;
+  letter-spacing: 0.5px;
+  word-spacing: 2px;
+  font-family: 'Noto Sans TC', 'Segoe UI', sans-serif;
+}
