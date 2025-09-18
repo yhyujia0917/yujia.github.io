@@ -17,6 +17,7 @@
       color: #f0f0f0;
       background: #1e1f26;
     }
+    /* 背景圖層（在最底） */
     body::before{
       content:"";
       position: fixed;
@@ -26,6 +27,16 @@
       pointer-events: none;
       will-change: transform;
     }
+    /* ✅ 半透明遮罩：覆蓋在背景圖上，但不蓋到內容 */
+    body::after{
+      content:"";
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.5); /* 你要的遮罩 */
+      z-index: 0;               /* 和 ::before 同層級，仍在內容之下 */
+      pointer-events: none;     /* 不阻擋點擊/互動 */
+    }
+
     .page{ position: relative; z-index: 1; }
     @media (max-width: 1024px){ body::before{ background-attachment: scroll; } }
 
@@ -76,25 +87,20 @@
     .card__desc--preview{
       display:-webkit-box;
       -webkit-box-orient:vertical;
-      -webkit-line-clamp:2; /* 卡片預覽最多兩行 */
+      -webkit-line-clamp:2;
       overflow:hidden;
       line-height:1.6;
       color:#ddd;
-      display: -webkit-box;
-     display: box; /* 標準屬性：某些新版本瀏覽器支援 */
-      -webkit-box-orient: vertical;
-      box-orient: vertical; /* 標準屬性 */
-  
-      -webkit-line-clamp: 2; /* Webkit 專用：Chrome, Safari */
-     line-clamp: 2; /* 標準屬性：Firefox 等新瀏覽器開始支援 */
-  
-      overflow: hidden;
-     text-overflow: ellipsis;
-     line-height: 1.6;
-     color: #ddd;
+
+      /* 盡量兼容的標準屬性寫法 */
+      display: box;
+      box-orient: vertical;
+      line-clamp: 2;
+
+      text-overflow: ellipsis;
     }
     @media (max-width:640px){
-      .card__desc--preview{ -webkit-line-clamp:3;line-clamp: 3; } /* 手機最多三行 */
+      .card__desc--preview{ -webkit-line-clamp:3; line-clamp:3; }
     }
 
     @media (max-width:1024px){ .card{ grid-column:span 6; } }
@@ -126,16 +132,15 @@
 
     .footer{ background:#f0f0f0; padding:1rem; text-align:center; font-size:.9rem; color:#333; }
     .footer p{ font-size:clamp(12px, 2vw, 16px); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .swiper, .swiper-wrapper, .swiper-slide {
-  height: auto;
-  }
-  .swiper-slide img {
-     width: 100%;
-     height: auto; /* 讓圖片高度依照比例變化 */
-     max-height: 75vh; /* 避免圖片過高 */
-     object-fit: contain;
-     display: block;
-  }
+
+    .swiper, .swiper-wrapper, .swiper-slide { height: auto; }
+    .swiper-slide img {
+      width: 100%;
+      height: auto;
+      max-height: 75vh;
+      object-fit: contain;
+      display: block;
+    }
   </style>
 </head>
 
@@ -150,7 +155,6 @@
         <ul class="nav-links" id="navMenu">
           <li><a href="index.html">首頁</a></li>
           <li><a href="about.html">關於我們</a></li>
-          <li><a href="services.html">服務項目</a></li>
           <li><a href="cases.html" aria-current="page">服務案例</a></li>
           <li><a href="contact.html">聯絡我們</a></li>
           <li><a href="https://www.1111.com.tw/corp/67789982" target="_blank" rel="noopener">加入我們</a></li>
@@ -160,7 +164,7 @@
 
     <main class="site-main" id="mainContent" tabindex="-1">
       <section class="cases" aria-labelledby="casesTitle">
-        <h1 class="cases__title" id="casesTitle">服務案例總覽</h1>
+        <h1 class="cases__title" id="casesTitle">服務項目</h1>
         <div class="grid" id="caseGrid"></div>
       </section>
     </main>
@@ -213,7 +217,7 @@
         category:"factory",
         preview:"提升生產效率與安全，完整動線與空間整合。",
         desc:"本案針對大型廠房做整體規劃，包含動線設計、安全性提升與作業區最佳化，讓流程更順暢並降低風險。",
-        images:["img/廠房/廠房01.jpg","img/廠房/廠房02.jpg","img/廠房/廠房03.jpg","img/廠房/廠房04.jpg","img/廠房/廠房05.jpg","img/廠房/廠房06.jpg"]
+        images:["img/廠房/廠房01.jpg","img/廠房/廠房02.jpg","img/廠房/廠房03.jpg","img/廠房/廠房04.jpg","img/廠房/廠房05.jpg"]
       },
       {
         title:"🔹 學校",
@@ -259,7 +263,7 @@
       }
     ];
 
-    // 卡片渲染：外層用 preview，沒有就自動截取 desc 前 80 字
+    // 卡片渲染（外層用 preview，沒有就截取 desc）
     const grid = document.getElementById('caseGrid');
     grid.innerHTML = CASES.map((c,i)=>{
       const short = (c.preview && c.preview.trim())
@@ -315,7 +319,7 @@
       modal.hidden = false;
       modal.classList.add('is-open');
       document.getElementById('modalTitle').textContent = item.title;
-      document.getElementById('modalDesc').textContent = item.desc; // 內層顯示完整描述
+      document.getElementById('modalDesc').textContent = item.desc;
       mountSlides(item.images, item.title);
       modalDialog.focus();
       document.addEventListener('keydown', trapFocus);
@@ -353,7 +357,7 @@
       else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
     }
 
-    /* 自動開啟（相容 ?open= 或 ?category=） */
+    // 自動開啟（相容 ?open= 或 ?category=）
     window.addEventListener('DOMContentLoaded', () => {
       const params = new URLSearchParams(location.search);
       const key = (params.get('open') || params.get('category') || '').toLowerCase();
