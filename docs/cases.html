@@ -17,7 +17,7 @@
       color: #f0f0f0;
       background: #1e1f26;
     }
-    /* 背景圖層（在最底） */
+    /* 背景圖層（最底） */
     body::before{
       content:"";
       position: fixed;
@@ -27,14 +27,14 @@
       pointer-events: none;
       will-change: transform;
     }
-    /* ✅ 半透明遮罩：覆蓋在背景圖上，但不蓋到內容 */
+    /* 半透明遮罩：覆蓋在背景圖上，但仍在內容之下 */
     body::after{
       content:"";
       position: fixed;
       inset: 0;
-      background-color: rgba(0, 0, 0, 0.5); /* 你要的遮罩 */
-      z-index: 0;               /* 和 ::before 同層級，仍在內容之下 */
-      pointer-events: none;     /* 不阻擋點擊/互動 */
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 0;
+      pointer-events: none;
     }
 
     .page{ position: relative; z-index: 1; }
@@ -83,7 +83,7 @@
     .card__title{ margin:0 0 8px; font-size:1.05rem; }
     .card__desc{ margin:0; opacity:.95; }
 
-    /* 預覽文字：限制行數 + 省略號 */
+    /* 預覽文字：限制行數 + 省略號（含標準與 -webkit 寫法以求最大相容） */
     .card__desc--preview{
       display:-webkit-box;
       -webkit-box-orient:vertical;
@@ -92,7 +92,6 @@
       line-height:1.6;
       color:#ddd;
 
-      /* 盡量兼容的標準屬性寫法 */
       display: box;
       box-orient: vertical;
       line-clamp: 2;
@@ -215,60 +214,53 @@
       {
         title:"🔹 廠房",
         category:"factory",
-        preview:"提升生產效率與安全，完整動線與空間整合。",
-        desc:"本案針對大型廠房做整體規劃，包含動線設計、安全性提升與作業區最佳化，讓流程更順暢並降低風險。",
         images:["img/廠房/廠房01.jpg","img/廠房/廠房02.jpg","img/廠房/廠房03.jpg","img/廠房/廠房04.jpg","img/廠房/廠房05.jpg"]
       },
       {
         title:"🔹 學校",
         category:"school",
-        preview:"優化教室與公共區域，打造舒適安全的學習環境。",
-        desc:"重新配置教室、照明與通風；兼顧安全性與便利性，營造舒適、實用的學習空間。",
         images:["img/學校/學校01.jpg","img/學校/學校02.jpg","img/學校/學校03.jpg","img/學校/學校04.jpg","img/學校/學校05.jpg"]
       },
       {
         title:"🔹 住家",
         category:"home",
-        preview:"結合收納與動線，美感與機能並重的居家空間。",
-        desc:"以舒適與實用為核心，整合收納設計、動線與材質色彩，提供溫馨便利的居住體驗。",
         images:["img/住家/住家01.jpg","img/住家/住家02.jpg","img/住家/住家03.jpg","img/住家/住家04.jpg","img/住家/住家05.jpg"]
       },
       {
         title:"🔹 醫療院所",
         category:"medical",
-        preview:"整合候診、診間與無障礙動線，提升就診效率。",
-        desc:"以醫療流程為核心，優化候診區、診療室與無障礙設施，提升效率與舒適度。",
         images:["img/醫院/醫院01.jpg","img/醫院/醫院02.jpg","img/醫院/醫院03.jpg","img/醫院/醫院04.jpg","img/醫院/醫院05.jpg"]
       },
       {
         title:"🔹 辦公室",
         category:"office",
-        preview:"開放式工作區、會議室與休憩區，強化協作效率。",
-        desc:"重塑動線與分區，結合會議協作與員工休憩空間，打造效率與互動兼具的辦公環境。",
-        images:["img/辦公室/辦公室01.jpg","img/辦公室/辦公室02.jpg","img/辦公室/辦公室03.jpg","img/辦公室/辦公室04.jpg"]
+        images:["img/辦公室/辦公室01.jpg","img/辦公室/辦公室02.jpg","img/辦公室/辦公室03.jpg","img/辦公室/辦公室04.jpg","img/辦公室/辦公室05.jpg","img/辦公室/辦公室06.jpg","img/辦公室/辦公室07.jpg","img/辦公室/辦公室08.jpg","img/辦公室/辦公室09.jpg","img/辦公室/辦公室10.jpg","img/辦公室/辦公室11.jpg"]
       },
       {
         title:"🔹 實驗室",
         category:"laboratory",
-        preview:"高規格安全與通風設計，提升研究效能。",
-        desc:"重點在於安全防護、通風與設備配置，提供穩定可靠的研究空間。",
         images:["img/實驗室/實驗室01.jpg","img/實驗室/實驗室02.jpg","img/實驗室/實驗室03.jpg","img/實驗室/實驗室04.jpg","img/實驗室/實驗室05.jpg"]
       },
       {
         title:"🔹 特約策略聯盟",
         category:"partner",
-        preview:"合作夥伴資訊與聯盟專案對外展示。",
-        desc:"介紹合作廠商與策略聯盟夥伴，包含專案連結與合作內容。外部連結：https://www.threepower.com.tw/index_tw.php",
+        desc:`<a href="https://www.threepower.com.tw/index_tw.php" target="_blank" rel="noopener noreferrer">
+             富特茂股份有限公司
+           </a>
+           &
+           <a href="http://www.fw-biotech.com.tw/index_tw.php" target="_blank" rel="noopener noreferrer">
+             聯臺國際科技有限公司
+           </a>`,
         images:["img/廠商/廠商01.jpg","img/廠商/廠商02.jpg","img/廠商/廠商03.jpg","img/廠商/廠商04.jpg","img/廠商/廠商05.jpg"]
       }
     ];
 
-    // 卡片渲染（外層用 preview，沒有就截取 desc）
+    // 卡片渲染（若無 preview 就從 desc 取前 80 字；卡片預覽保持純文字）
     const grid = document.getElementById('caseGrid');
     grid.innerHTML = CASES.map((c,i)=>{
       const short = (c.preview && c.preview.trim())
         ? c.preview.trim()
-        : (String(c.desc||'').trim().slice(0,80) + (String(c.desc||'').length>80 ? '…' : ''));
+        : (String(c.desc||'').replace(/<[^>]*>/g, '').trim().slice(0,80) + (String(c.desc||'').length>80 ? '…' : ''));
       return `
         <article class="card" data-index="${i}" tabindex="0" aria-labelledby="card-title-${i}">
           <img class="card__img" src="${c.images[0]}" alt="案例預覽：${c.title}" loading="lazy">
@@ -319,7 +311,10 @@
       modal.hidden = false;
       modal.classList.add('is-open');
       document.getElementById('modalTitle').textContent = item.title;
-      document.getElementById('modalDesc').textContent = item.desc;
+
+      // 這裡改成 innerHTML，讓描述內的 <a> 連結可點擊
+      document.getElementById('modalDesc').innerHTML = item.desc || '';
+
       mountSlides(item.images, item.title);
       modalDialog.focus();
       document.addEventListener('keydown', trapFocus);
