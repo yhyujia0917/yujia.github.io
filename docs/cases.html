@@ -17,7 +17,6 @@
       color: #f0f0f0;
       background: #1e1f26;
     }
-    /* 背景圖層（最底） */
     body::before{
       content:"";
       position: fixed;
@@ -27,7 +26,6 @@
       pointer-events: none;
       will-change: transform;
     }
-    /* 半透明遮罩：覆蓋在背景圖上，但仍在內容之下 */
     body::after{
       content:"";
       position: fixed;
@@ -82,8 +80,6 @@
     .card__body{ padding:16px; }
     .card__title{ margin:0 0 8px; font-size:1.05rem; }
     .card__desc{ margin:0; opacity:.95; }
-
-    /* 預覽文字：限制行數 + 省略號（含標準與 -webkit 寫法以求最大相容） */
     .card__desc--preview{
       display:-webkit-box;
       -webkit-box-orient:vertical;
@@ -191,13 +187,11 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <script>
-    // 漢堡選單
     document.getElementById("hamburger").addEventListener("click", function () {
       const menu = document.getElementById("navMenu");
       const open = menu.classList.toggle("open");
       this.setAttribute("aria-expanded", open ? "true" : "false");
     });
-    // 回頂
     window.addEventListener('scroll', function () {
       const btn = document.getElementById("backToTop");
       btn.classList.toggle("show", (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300));
@@ -206,8 +200,6 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     };
   </script>
-
-  <!-- 服務項目（私有作用域） -->
   <script>
   (function () {
     const CASES = [
@@ -254,8 +246,6 @@
         images:["img/廠商/廠商01.jpg","img/廠商/廠商02.jpg","img/廠商/廠商03.jpg","img/廠商/廠商04.jpg","img/廠商/廠商05.jpg"]
       }
     ];
-
-    // 卡片渲染（若無 preview 就從 desc 取前 80 字；卡片預覽保持純文字）
     const grid = document.getElementById('caseGrid');
     grid.innerHTML = CASES.map((c,i)=>{
       const short = (c.preview && c.preview.trim())
@@ -271,14 +261,11 @@
         </article>
       `;
     }).join('');
-
-    // Modal + Swiper
     const modal = document.getElementById('modal');
     const modalDialog = modal.querySelector('.modal__dialog');
     const modalClose = document.getElementById('modalClose');
     const swiperEl = modal.querySelector('.swiper');
     let swiper;
-
     function mountSlides(images, title){
       const slides = images.map(src => `<div class="swiper-slide"><img src="${src}" alt="${title} 圖片" loading="lazy"></div>`);
       const paginationEl = modal.querySelector('.swiper-pagination');
@@ -304,23 +291,18 @@
         swiper.slideToLoop(0, 0);
       }
     }
-
     function openModalByIndex(index){
       const item = CASES[index];
       if (!item) return;
       modal.hidden = false;
       modal.classList.add('is-open');
       document.getElementById('modalTitle').textContent = item.title;
-
-      // 這裡改成 innerHTML，讓描述內的 <a> 連結可點擊
       document.getElementById('modalDesc').innerHTML = item.desc || '';
 
       mountSlides(item.images, item.title);
       modalDialog.focus();
       document.addEventListener('keydown', trapFocus);
     }
-
-    // 卡片點擊 / Enter
     grid.addEventListener('click', (e)=>{
       const card = e.target.closest('.card');
       if(card) openModalByIndex(Number(card.dataset.index));
@@ -331,7 +313,6 @@
         if(card) openModalByIndex(Number(card.dataset.index));
       }
     });
-
     function closeModal(){
       modal.classList.remove('is-open');
       modal.hidden = true;
@@ -351,8 +332,6 @@
       if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
       else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
     }
-
-    // 自動開啟（相容 ?open= 或 ?category=）
     window.addEventListener('DOMContentLoaded', () => {
       const params = new URLSearchParams(location.search);
       const key = (params.get('open') || params.get('category') || '').toLowerCase();

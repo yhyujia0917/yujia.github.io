@@ -13,8 +13,6 @@
   <meta property="og:url" content="https://yourdomain.com">
   <meta name="google-site-verification" content="lIPAF24NF9fpDgzQ5WlQ1V5s6Onf7fdKKOOuWx4rOzQ" />
   <title>品牌首頁</title>
-
-  <!-- 字體與樣式 -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/index-style.css">
   <style>
@@ -49,8 +47,8 @@
       border: none;
       cursor: pointer;
       display: none;
-      top: 50%; /* 導覽列高度的 50% */
-      transform: translateY(-50%); /* 往上拉一半高度，達到垂直置中 */
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     .nav-links {
@@ -99,7 +97,6 @@
       }
     }
 
-    /* 回頂按鈕 */
     #backToTop {
       position: fixed;
       bottom: 40px;
@@ -119,7 +116,6 @@
       display: block;
     }
 
-    /* 簡易頁尾 */
     .footer {
       background-color: #f0f0f0;
       padding: 1rem;
@@ -133,19 +129,15 @@
       font-size: 12px;
     }
     .footer p {
-      font-size: clamp(12px, 2vw, 16px); /* 最小 12px，隨螢幕寬度變化，最大 16px */
-      white-space: nowrap;               /* 禁止自動換行 */
-      overflow: hidden;                  /* 避免超出容器 */
-      text-overflow: ellipsis;           /* 超出時用 ... 表示，可選 */
+      font-size: clamp(12px, 2vw, 16px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   </style>
 </head>
 <body>
-
-  <!-- 回到頂部按鈕 -->
   <button id="backToTop" title="回到頂部">⬆</button>
-
-  <!-- 響應式導覽列 -->
   <nav class="top-nav">
     <div class="nav-container">
       <a href="index.html" class="logo"><span class="mobile-only">裕傢室內裝修有限公司</span></a>
@@ -159,9 +151,6 @@
       </ul>
     </div>
   </nav>
-
-
-  <!-- 輪播區 -->
   <section class="hero">
     <div class="slider">
       <div class="slides" id="slides">
@@ -180,13 +169,9 @@
       </footer>
     </div>
   </section>
-
-  <!-- 網站版權 footer -->
   <footer class="footer">
     <p class="center-text">版權所有 © 裕傢室內裝修有限公司｜Designed by 要留儀翰 網頁設計</p>
   </footer>
-
-  <!-- JavaScript -->
   <script src="js/script.js"></script>
   <script>
     function toggleMenu() {
@@ -195,12 +180,9 @@
     }
   </script>
   <script>
-    // 漢堡選單切換
     document.getElementById("hamburger").addEventListener("click", function () {
       document.getElementById("navMenu").classList.toggle("open");
     });
-
-    // 回頂按鈕
     window.onscroll = function () {
       const btn = document.getElementById("backToTop");
       if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {

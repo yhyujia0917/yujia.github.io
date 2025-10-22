@@ -38,8 +38,8 @@
       border: none;
       cursor: pointer;
       display: none;
-      top: 50%; /* 導覽列高度的 50% */
-      transform: translateY(-50%); /* 往上拉一半高度，達到垂直置中 */
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     .nav-links {
@@ -87,8 +87,6 @@
         display: flex;
       }
     }
-
-    /* 回頂按鈕 */
     #backToTop {
       position: fixed;
       bottom: 40px;
@@ -108,7 +106,6 @@
       display: block;
     }
 
-    /* 簡易頁尾 */
     .footer {
       background-color: #f0f0f0;
       padding: 1rem;
@@ -127,18 +124,18 @@
       font-family: 'Noto Sans TC', 'Segoe UI', sans-serif;
     }
     .footer p {
-      font-size: clamp(12px, 2vw, 16px); /* 最小 12px，隨螢幕寬度變化，最大 16px */
-      white-space: nowrap;               /* 禁止自動換行 */
-      overflow: hidden;                  /* 避免超出容器 */
-      text-overflow: ellipsis;           /* 超出時用 ... 表示，可選 */
+      font-size: clamp(12px, 2vw, 16px);
+      white-space: nowrap; 
+      overflow: hidden; 
+      text-overflow: ellipsis;
     }
   </style>
 </head>
 <body>
-  <!-- 回到頂部按鈕 -->
+
   <button id="backToTop" title="回到頂部">⬆</button>
 
-  <!-- 響應式導覽列 -->
+
   <nav class="top-nav">
     <div class="nav-container">
       <a href="index.html" class="logo"><span class="mobile-only">裕傢室內裝修有限公司</span></a>
@@ -153,7 +150,6 @@
     </div>
   </nav>
 
-  <!-- 主內容區 -->
   <section class="bg-photo">
     <div class="bg-overlay"></div>
     <div class="text-container">
@@ -175,15 +171,13 @@
     </div>
   </section>
 
-  <!-- JS 控制：選單與回頂功能 -->
-  <!-- JavaScript 功能 -->
   <script>
-    // 漢堡選單切換
+
     document.getElementById("hamburger").addEventListener("click", function () {
       document.getElementById("navMenu").classList.toggle("open");
     });
 
-    // 回頂按鈕
+
     window.onscroll = function () {
       const btn = document.getElementById("backToTop");
       if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
@@ -196,7 +190,7 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     };
   </script>
-  <!-- 網站版權 footer -->
+
   <footer class="footer">
     <p class="center-text">版權所有 © 裕傢室內裝修有限公司｜Designed by 要留儀翰 網頁設計</p>
   </footer>

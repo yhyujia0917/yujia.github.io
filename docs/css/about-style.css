@@ -1,4 +1,3 @@
-/* 字體與排版 */
 * {
   margin: 0;
   padding: 0;
@@ -31,8 +30,6 @@ a:hover {
 .fonti {
   color: aqua;
 }
-
-/* 導覽列 */
 .top-nav {
   width: 100%;
   backdrop-filter: blur(8px);
@@ -64,7 +61,6 @@ a:hover {
   font-size: 1.2rem;
   font-weight: bold;
 }
-/* 回頂按鈕 + 動畫 */
 #backToTop {
   background: none;
   animation: bounce 2s infinite;
@@ -89,8 +85,6 @@ a:hover {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
-
-/* 公司資訊欄 */
 .info-bar {
   position: absolute;
   bottom: 0;
@@ -107,7 +101,6 @@ a:hover {
   backdrop-filter: blur(6px);
 }
 
-/* 主要內容區 */
 .content {
   padding: 60px 20px;
   max-width: 800px;
@@ -120,7 +113,6 @@ a:hover {
   color: #333;
 }
 
-/* 背景圖區塊 */
 .bg-photo {
   flex: 1;
   position: relative;
@@ -156,7 +148,6 @@ a:hover {
   text-align: center;
 }
 
-/* footer 固定底部 */
 .footer {
   height: 20px;
   color: white;
@@ -171,13 +162,13 @@ a:hover {
 }
 
 .footer p {
-  font-size: clamp(12px, 2vw, 16px); /* 最小 12px，隨螢幕寬度變化，最大 16px */
-  white-space: nowrap;               /* 禁止自動換行 */
-  overflow: hidden;                  /* 避免超出容器 */
-  text-overflow: ellipsis;           /* 超出時用 ... 表示，可選 */
+  font-size: clamp(12px, 2vw, 16px);
+  white-space: nowrap;             
+  overflow: hidden;             
+  text-overflow: ellipsis;  
 }
 
-/* 響應式設計 */
+
 @media (max-width: 768px) {
   .controls-left, .controls-right {
     font-size: 1.2rem;
@@ -249,7 +240,7 @@ a:hover {
   }
 }
 
-/* 漢堡選單 */
+
 .hamburger {
   z-index: 1001;
   position: absolute;
@@ -260,8 +251,8 @@ a:hover {
   border: none;
   cursor: pointer;
   display: none;
-  top: 50%; /* 導覽列高度的 50% */
-  transform: translateY(-50%); /* 往上拉一半高度，達到垂直置中 */
+  top: 50%;
+  transform: translateY(-50%); 
 }
 
 .nav-links {

@@ -1,13 +1,7 @@
-/* -----------------------------------
-   字體設定（建議在 <head> 中引入 Google 字體）
------------------------------------ */
 p {
   font-family: 'Noto Sans TC', 'Segoe UI', sans-serif;
 }
 
-/* -----------------------------------
-   全域設定與字體樣式
------------------------------------ */
 * {
   margin: 0;
   padding: 0;
@@ -28,9 +22,6 @@ a:hover {
   color: #00aaff;
 }
 
-/* -----------------------------------
-   導覽列
------------------------------------ */
 .top-nav {
   position: fixed;
   top: 0;
@@ -103,9 +94,7 @@ a:hover {
     .mobile-only {
       display: none;
     }
-/* -----------------------------------
-   回到頂部按鈕
------------------------------------ */
+
 #backToTop {
   position: fixed;
   bottom: 30px;
@@ -124,35 +113,28 @@ a:hover {
   display: block;
 }
 
-/* bounce 動畫 */
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
 
-/* -----------------------------------
-   輪播區（使用比例）
------------------------------------ */
+
 .hero {
   position: relative;
 }
-/* 簡易頁尾 */
+
     .footer {
   background-color: #f0f0f0;
   padding: 1rem;
   font-size: 0.9rem;
   max-height: 32px;
 
-  /* 水平垂直置中用 Flexbox */
+ 
   display: flex;
-  justify-content: center; /* 水平置中 */
-  align-items: center;     /* 垂直置中 */
+  justify-content: center; 
+  align-items: center;    
 
-  /* 如果想固定在底部，可加這行 */
-  /* position: fixed;
-     bottom: 0;
-     left: 0;
-     width: 100%; */
+
 }
 
 .center-text {
@@ -162,8 +144,8 @@ a:hover {
 .slider {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;  /* 比例自動調整 */
-  height: calc(89vh); /* 假設 info-bar 是 60px 高 */
+  aspect-ratio: 16 / 9;  
+  height: calc(89vh);
   display: flex;
   overflow: hidden;
 }
@@ -190,7 +172,7 @@ a:hover {
   display: block;
 }
 
-/* 幻燈片左右按鈕 */
+
 .controls-left, .controls-right {
   position: absolute;
   top: 50%;
@@ -206,7 +188,7 @@ a:hover {
 .controls-left { left: 10px; }
 .controls-right { right: 10px; }
 
-/* 幻燈片進度顯示 */
+
 .slide-indicator {
   position: absolute;
   bottom: 75px;
@@ -218,7 +200,7 @@ a:hover {
   z-index: 3;
 }
 
-/* 向下箭頭 */
+
 .scroll-down {
   position: absolute;
   bottom: 60px;
@@ -231,7 +213,6 @@ a:hover {
   z-index: 5;
 }
 
-/* 公司資訊欄 */
 .info-bar {
   position: absolute;
   bottom: 0;
@@ -248,7 +229,6 @@ a:hover {
   backdrop-filter: blur(6px);
 }
 
-/* 主要內容 */
 .content {
   padding: 60px 20px;
   max-width: 800px;
@@ -261,12 +241,10 @@ a:hover {
   font-size: 12px;
 }
 
-/* -----------------------------------
-   響應式設計
------------------------------------ */
+
 @media (max-width: 768px) {
   .slider {
-    aspect-ratio: 4 / 3; /* 平板比例略高 */
+    aspect-ratio: 4 / 3;
   }
 
   .controls-left, .controls-right {
@@ -315,9 +293,6 @@ a:hover {
   }
 }
 
-/* -----------------------------------
-   漢堡選單樣式
------------------------------------ */
 .hamburger {
   display: none;
   font-size: 2rem;

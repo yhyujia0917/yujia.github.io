@@ -1,4 +1,3 @@
-/* 字體與排版 */
 * {
   margin: 0;
   padding: 0;
@@ -31,7 +30,6 @@ a:hover {
   color: aqua;
 }
 
-/* 導覽列 */
 .top-nav {
   position: fixed;
   top: 0;
@@ -50,7 +48,6 @@ a:hover {
   transition: color 0.2s;
 }
 
-/* 回頂按鈕 + 動畫 */
 #backToTop {
   position: fixed;
   bottom: 30px;
@@ -72,7 +69,6 @@ a:hover {
   50% { transform: translateY(-10px); }
 }
 
-/* 漢堡選單 */
 .hamburger {
   display: none;
   font-size: 2rem;
@@ -117,7 +113,6 @@ a:hover {
   }
 }
 
-/* 背景圖區塊 */
 .bg-photo {
   flex: 1;
   position: relative;
@@ -154,7 +149,6 @@ a:hover {
   text-align: center;
 }
 
-/* 公司資訊欄（如需） */
 .info-bar {
   background: rgba(0, 0, 0, 0.5);
   color: white;
@@ -168,14 +162,12 @@ a:hover {
   backdrop-filter: blur(6px);
 }
 
-/* 主要內容區 */
 .content {
   padding: 60px 20px;
   max-width: 800px;
   margin: auto;
 }
 
-/* footer 固定底部 */
 .footer {
   height: 20px;
   background-color: rgba(0, 0, 0, 0.8);
@@ -191,7 +183,6 @@ a:hover {
   text-align: center;
 }
 
-/* 響應式調整 */
 @media (max-width: 768px) {
   .info-bar {
     font-size: 0.85rem;
